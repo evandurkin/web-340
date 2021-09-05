@@ -5,7 +5,7 @@
 // requires express, HTTP, logger and assigns them to separate variables
 var express = require("express");
 var http = require("http");
-var logger = require("logger");
+var logger = require("morgan");
 
 // requires Morgan for middleware and assigns express to a variable
 var app = express();

@@ -5,7 +5,7 @@
 // requires express, http, morgan and assigns them to separate variables
 const express = require("express");
 const http = require("http");
-const logger = require("logger");
+const logger = require("morgan");
 
 // assigns express to a variable and uses morgan for middleware
 let app = express();
