@@ -1,0 +1,9 @@
+{
+    "title": "exercise-5.3",
+    "author": "Evan Durkin",
+    "private": true,
+    "dependencies": {
+        "express": "^4.17.1",
+        "pug": "^3.0.2"
+    }
+}
