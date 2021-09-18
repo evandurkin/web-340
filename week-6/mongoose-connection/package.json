@@ -1,0 +1,10 @@
+{
+    "name": "exercise-6.3",
+    "author": "Evan Durkin",
+    "private": true,
+    "dependencies": {
+        "express": "^4.17.1",
+        "mongoose": "^5.13.9",
+        "morgan": "^1.10.0"
+    }
+}
