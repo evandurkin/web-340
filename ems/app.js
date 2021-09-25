@@ -7,6 +7,8 @@ var express = require("express");
 var http = require("http");
 var path = require("path");
 var logger = require("morgan");
+var mongoose = require("mongoose");
+const Employee = require("./models/employee");
 
 // assigns express to app variable
 var app = express();
@@ -25,6 +27,31 @@ app.get("/", function(req, res){
     res.render("index", {
         title: "Home Page"
     });
+});
+
+// mongoDB connection string
+var mongoDB = "mongodb+srv://bu-user:NRMYxvt57Yb5DQt@buwebdev-cluster-1.a6yhz.mongodb.net/test";
+
+// creates mongo connection
+mongoose.connect(mongoDB, {
+    useMongoClient: true
+});
+// mongo Promise object
+mongoose.Promise = global.Promise;
+
+// database variable to hold connection
+var db = mongoose.connection;
+
+// error handling
+db.on("error", console.error.bind(console, "MongoDB connected error: "));
+
+db.once("open", function() {
+    console.log("Application connected to mLab MongoDB instance");
+});
+
+let employee = new Employee({
+    firstName: "Evan",
+    lastName: "Durkin"
 });
 
 // creates server and listens on port 8080
