@@ -1,8 +1,10 @@
-<!--
+<!-------------------------------
     Title: EMS Assignment
     Author: Evan Durkin
-    Date: September 18, 2021
--->
+    Date: October 3, 2021
+    Description: index page for
+    EMS system
+--------------------------------->
 
 <!DOCTYPE html>
 
@@ -11,28 +13,33 @@
     <%- include("header"); -%>
 
     <body>
+      <!--navigation from ejs file-->
         <%- include("navbar"); -%>
         <div class="container">
-          <div class="container p-4 m-2">
-            <h1 style="color: #BDA8E0;">Evan's EMS Landing Page!</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          </div>
-          <div class="container p-3" style="background-color: #BDA8E0; border-radius: 6px; color: white;">
-            <h2>Sample Box</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          </div>
-          <div class="container mt-4">
-            <div class="p-3 row align-items-center">
-              <div class="col">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-              </div>
-              <div class="col">
-               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-             </div>
+            <div class="container p-4 m-2">
+              <h1 style="color: #BDA8E0;">Evan's EMS Landing Page!</h1>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             </div>
+
+            <div class="container p-3" style="background-color: #BDA8E0; border-radius: 6px; color: white;">
+              <h2>Sample Box</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+
+            <div class="container mt-4">
+              <div class="p-3 row align-items-center">
+                  <div class="col">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  </div>
+                  
+                  <div class="col">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  </div>
+              </div>
           </div>
           <!--footer from ejs file-->
           <%- include("footer"); -%>
+          <%- include("scripts"); -%>
         </div>
     </body>
 </html>

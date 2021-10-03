@@ -1,5 +1,52 @@
-<!--
+<!-------------------------------
     Title: EMS Assignment
     Author: Evan Durkin
-    Date: September 18, 2021
--->
+    Date: October 3, 2021
+    Description: Entry form 
+    for adding new employee name
+--------------------------------->
+
+<!DOCTYPE html>
+<html lang="en-US">
+
+  <!--header from ejs file-->
+  <%- include("header"); -%>
+
+    <body>
+        <!--navigation from ejs file-->
+        <%- include("navbar"); -%>
+        <br/><br/>
+
+        <div class="container p-3" style="background-color: #BDA8E0; border-radius: 6px; color: white;">
+            <h2><%= message %></h2>
+            <!--entry form sends submissions to /process-->
+            <form method="post" action="/process">
+              <div class="form-group">
+                <label for="txtFirstName">First Name:</label>
+                <input type="text" class="form-control" id="txtFirstName" name="txtFirstName" />
+              </div>
+      
+              <div class="form-group">
+                <label for="txtLastName">Last Name:</label>
+                <input type="text" class="form-control" id="txtLastName" name="txtLastName" />
+              </div>
+      
+              <div class="form-group" style="display: inline-block;">
+                <!-- CSRF token -->
+                <input name="_csrf" value="<%= csrfToken %>" type="hidden" />
+                <button type="submit" class="btn btn-light float-right">
+                  Submit
+                </button>
+              </div>
+
+            </form>
+        </div>
+        <div class="container p-3">
+          <a href="/" style="color: #675C7A;">Return</a>
+        </div>
+    </body>
+    <!--footer and scripts from ejs files-->
+    <% include ("footer") %>
+    <% include ("scripts") %>
+</html>
+

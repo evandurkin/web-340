@@ -1,5 +1,56 @@
-<!--
+<!-------------------------------
     Title: EMS Assignment
     Author: Evan Durkin
-    Date: September 18, 2021
--->
+    Date: October 3, 2021
+    Description: List of new
+    employee names
+--------------------------------->
+
+<!DOCTYPE html>
+<html lang="en-US">
+  <!--header from ejs file-->
+  <%- include("header"); -%>
+
+    <body>
+      <!--navigation from ejs file-->
+      <%- include("navbar"); -%>
+      <br/><br/>
+
+      <!--table to hold employee first and last names-->
+      <div class="container p-3" style="background-color: #BDA8E0; border-radius: 6px; color: #675C7A">
+        <h2>Employee List</h2>
+        <table class="table table-light table-striped table-hover">
+          <thead class="thead-custom">
+            <tr>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--fills entry fields or prompts user to add a new employee-->
+            <% if (employees.length) { %>
+              <% employees.forEach(function (employee) { %>
+                <tr>
+                  <td><%= employee.firstName %></td>
+                  <td><%= employee.lastName %></td>
+                </tr>
+              <% }) %>
+            <% } else { %>>
+              <tr>
+                <td colspan="3">
+                  No entries!<br />
+                  <a href="/new" class="listview">Add one!</a>
+                </td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+      <div class="container p-3">
+        <a href="/" style="color: #675C7A;">Return</a>
+      </div>
+    </body>
+    <% include ("footer") %>
+    <% include ("scripts") %>
+</html>
+  

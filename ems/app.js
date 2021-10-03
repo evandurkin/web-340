@@ -1,33 +1,96 @@
 // Title: EMS Assignment
 // Author: Evan Durkin
-// Date: September 18, 2021
+// Date: October 3, 2021
 
 // requires express, http, url path, morgan and assigns all to separate variables
-var express = require("express");
-var http = require("http");
-var path = require("path");
-var logger = require("morgan");
-var mongoose = require("mongoose");
+const express = require("express");
+const http = require("http");
+const path = require("path");
+const logger = require("morgan");
+const mongoose = require("mongoose");
 const Employee = require("./models/employee");
+const helmet = require("helmet");
+const csrf = require("csurf");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 
-// assigns express to app variable
-var app = express();
+// assigns express and csrf protection
+const app = express();
+const csrfProtection = csrf({cookie:true});
 
-// directs url path to views folder
+// set statements
 app.set("views", path.resolve(__dirname,"views"));
-
-// sets ejs as template system
 app.set("view engine", "ejs");
 
-// uses morgan for middleware
+// use statements
 app.use(logger("short"));
+app.use(helmet.xssFilter());
+app.use(bodyParser.urlencoded({
+    extended:true
+}));
+app.use(cookieParser());
+app.use(csrfProtection);
+app.use(function(req, res, next){
+    const token = req.csrfToken();
+    res.cookie("XSRF-TOKEN", token);
+    res.locals.csrfToken = token;
+    next();
+});
 
-// request and response for index page
+// routing
 app.get("/", function(req, res){
     res.render("index", {
-        title: "Home Page"
+        title: "Evan Durkin | EMS",
+        message: "Employee Information"
     });
 });
+
+app.get("/new", function(req,res){
+    res.render("new", {
+        title: "New | EMS",
+        message: "Enter New Employee"
+    });
+});
+
+app.get("/list", function(req, res){
+    Employee.find({}, function(error, employees){
+        if(error)throw error;
+        res.render("list",{
+            title: "Employee List",
+            employees: employees
+        });
+    });
+});
+
+app.get("/", function (req, res) {
+    res.render("index", {
+      title: "XSS Prevention Example",
+    });
+  });
+
+app.post("/process", function(req,res){
+    if(!req.body.txtFirstName || !req.body.txtLastName){
+        res.status(400).send("Entries must have both names filled out.");
+        return;
+    }
+    const firstName = req.body.txtFirstName;
+    const lastName = req.body.txtLastName;
+  
+    // creates new employee 
+    let employee = new Employee({
+      firstName: firstName,
+      lastName: lastName
+    });
+    employee.save(function(error) {
+        if (error) {
+          console.log(error);
+          throw err;
+        } else {
+            console.log(firstName + " " + lastName + ' saved successfully!');
+            res.redirect('/');
+        }
+      });
+    });
 
 // mongoDB connection string
 var mongoDB = "mongodb+srv://bu-user:NRMYxvt57Yb5DQt@buwebdev-cluster-1.a6yhz.mongodb.net/test";
@@ -47,11 +110,6 @@ db.on("error", console.error.bind(console, "MongoDB connected error: "));
 
 db.once("open", function() {
     console.log("Application connected to mLab MongoDB instance");
-});
-
-let employee = new Employee({
-    firstName: "Evan",
-    lastName: "Durkin"
 });
 
 // creates server and listens on port 8080
