@@ -1,6 +1,7 @@
 // Title: EMS Assignment
 // Author: Evan Durkin
-// Date: October 3, 2021
+// Date: October 9, 2021
+
 
 // requires express, http, url path, morgan and assigns all to separate variables
 const express = require("express");
@@ -21,6 +22,8 @@ const csrfProtection = csrf({cookie:true});
 // set statements
 app.set("views", path.resolve(__dirname,"views"));
 app.set("view engine", "ejs");
+app.set("port", process.env.PORT || 8080);
+
 
 // use statements
 app.use(logger("short"));
@@ -68,6 +71,23 @@ app.get("/", function (req, res) {
     });
   });
 
+app.get("/view/:queryName", function(req, res) {
+    const queryName = req.params["queryName"];
+    Employee.find({"firstName": queryName}, function(error, employees){
+        if(error)throw error;
+        console.log(employees);
+        if (employees.length > 0) {
+            res.render("view", {
+                title: "Employee Record",
+                employee: employees
+            })
+        }
+        else {
+            res.redirect("/list")
+        }
+    });
+});
+
 app.post("/process", function(req,res){
     if(!req.body.txtFirstName || !req.body.txtLastName){
         res.status(400).send("Entries must have both names filled out.");
@@ -113,6 +133,9 @@ db.once("open", function() {
 });
 
 // creates server and listens on port 8080
-http.createServer(app).listen(8080,function(){
-    console.log("Application started on port 8080!");
-});
+// http.createServer(app).listen(8080,function(){
+//     console.log("Application started on port 8080!");
+// });
+
+http.createServer(app).listen(app.get("port"), function()
+    { console.log("Application started on port" + app.get("port"))});

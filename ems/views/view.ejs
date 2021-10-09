@@ -1,5 +1,52 @@
-<!--
+<!-------------------------------
     Title: EMS Assignment
     Author: Evan Durkin
-    Date: September 18, 2021
--->
+    Date: October 9, 2021
+    Description: employee listing 
+--------------------------------->
+
+<!DOCTYPE html>
+<html lang="en-US">
+    <!--header from ejs file-->
+    <%- include('header.ejs'); -%>
+
+    <body>
+        <!--navigation from ejs file-->
+        <%- include('navbar.ejs'); -%>
+        <br/><br/>
+
+        <!--container to display employee listing information-->
+      <div class="container p-3" style="background-color: #BDA8E0; border-radius: 6px; color: #675C7A">
+            <h2>Employee Listing</h2>
+            <br/>
+            <div>
+              <div class="form-group">
+                <label for="txtFirstName">First Name:</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="txtFirstName"
+                    readonly
+                    value="<%= employee[0].firstName %>"
+                    name="txtFirstName"
+                />
+                <label for="txtLastName">Last Name:</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="txtLastName"
+                    readonly
+                    value="<%= employee[0].lastName %>"
+                    name="txtLastName"
+                />
+            </div>
+            <br/><br/>
+
+            <a href="/">Return</a>
+          </div>
+          
+          <!--footer and scripts from ejs files-->
+        <%- include('footer.ejs'); -%>
+        <%- include('scripts'); %>
+    </body>
+</html>
